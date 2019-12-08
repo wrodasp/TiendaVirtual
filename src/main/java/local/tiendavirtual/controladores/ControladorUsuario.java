@@ -22,6 +22,7 @@ public class ControladorUsuario {
 
 	@GetMapping("/usuarios")
 	public List<Usuario> listarUsuarios() {
+		System.out.println("entro aqui");
 		return repositorio.findAll();
 	}
 
@@ -29,4 +30,6 @@ public class ControladorUsuario {
 	public Usuario buscar(@PathVariable(value = "id") int id) {
 		return null;
 	}
+	
+
 }
