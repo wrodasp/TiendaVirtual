@@ -8,24 +8,27 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "usuarios")
 public class Usuario {
-    
+
     private String nombre;
     private String apellido;
     private String direccion;
     private String telefono;
     private String correo;
     private String clave;
+    private String roll;
 
     public Usuario() {
     }
 
-    public Usuario(String nombre, String apellido, String direccion, String telefono, String correo, String clave) {
+    public Usuario(String nombre, String apellido, String direccion,
+            String telefono, String correo, String clave, String roll) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.direccion = direccion;
         this.telefono = telefono;
         this.correo = correo;
         this.clave = clave;
+        this.roll = roll;
     }
 
     @Column(name = "nombre")
@@ -64,6 +67,15 @@ public class Usuario {
         this.telefono = telefono;
     }
 
+    @Column(name = "roll")
+    public String getRoll() {
+        return roll;
+    }
+
+    public void setRoll(String roll) {
+        this.roll = roll;
+    }
+
     @Id
     @Column(name = "correo")
     public String getCorreo() {
@@ -85,11 +97,11 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario [nombre=" + nombre + ", " +
-                        "apellido=" + apellido + ", " +
-                        "direccion=" + direccion + ", " +
-                        "telefono=" + telefono + ", " +
-                        "correo=" + correo + ", " +
-                        "clave=" + clave;
+        return "Usuario [nombre=" + nombre + ", "
+                + "apellido=" + apellido + ", "
+                + "direccion=" + direccion + ", "
+                + "telefono=" + telefono + ", "
+                + "correo=" + correo + ", "
+                + "clave=" + clave;
     }
 }
