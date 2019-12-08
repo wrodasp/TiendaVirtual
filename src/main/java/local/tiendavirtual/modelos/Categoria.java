@@ -12,8 +12,14 @@ public class Categoria {
     public Categoria() {
     }
 
+    public Categoria(int id, String descripcion) {
+        this.id = id;
+        this.descripcion = descripcion;
+    }
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
         return id;
     }
@@ -29,5 +35,10 @@ public class Categoria {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    @Override
+    public String toString() {
+        return "Categoria [id=" + id + ",descripcion=" + descripcion + "]";
     }
 }
