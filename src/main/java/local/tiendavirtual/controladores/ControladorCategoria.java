@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping()
 public class ControladorCategoria {
-    
+
     @Autowired
     private CategoriaRepositorio repositorio;
     
