@@ -32,6 +32,11 @@ public class ControladorCategoria {
         return repositorio.save(categoria);
     }
     
+    @GetMapping("/categorias/{id}")
+    public Categoria buscar(@PathVariable("id") int id) {
+    	return repositorio.findById(id).get(); 
+    }
+    
     @DeleteMapping("/categorias/{id}")
     public void eliminar(@PathVariable("id") int id) {
         repositorio.deleteById(id);
