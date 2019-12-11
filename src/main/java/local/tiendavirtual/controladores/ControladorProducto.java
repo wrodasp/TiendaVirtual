@@ -4,6 +4,8 @@ import java.util.List;
 import javax.validation.Valid;
 import local.tiendavirtual.modelos.Producto;
 import local.tiendavirtual.repositorios.ProductoRepositorio;
+import local.tiendavirtual.repositorios.ProductoRepositorio2;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,6 +24,7 @@ public class ControladorProducto {
     
     @Autowired
     private ProductoRepositorio repositorio;
+    private ProductoRepositorio2 repositorio2;
     
     @GetMapping("/productos")
     public List<Producto> listarProductos() {
@@ -33,14 +36,22 @@ public class ControladorProducto {
         return repositorio.save(producto);
     }
     
-    @PutMapping("/productos")
+    @PutMapping("/productos/{id}")
     public Producto actualizar(@Valid @RequestBody Producto producto) {
         return repositorio.save(producto);
     }
     
     @GetMapping("/productos/{id}")
     public Producto buscar(@PathVariable("id") int id) {
-        return repositorio.findById(id).orElse(null);
+    	
+    	 return repositorio.findById(id).get();
+    	 
+    }
+    
+   @GetMapping("/productos/filtro/{descripcion}")
+    public Producto buscarDescripcion(@PathVariable("descripcion") String descripcion) {
+    	System.out.println(descripcion);
+        return repositorio.findAll().stream().filter(Producto -> Producto.getDescripcion().equals(descripcion)).findFirst().get();
     }
     
     @DeleteMapping("/productos/{id}")
