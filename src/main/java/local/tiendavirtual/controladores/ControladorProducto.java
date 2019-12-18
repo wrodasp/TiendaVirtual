@@ -1,11 +1,13 @@
 package local.tiendavirtual.controladores;
 
+import java.util.Comparator;
 import java.util.List;
 import javax.validation.Valid;
 import local.tiendavirtual.modelos.Producto;
 import local.tiendavirtual.repositorios.ProductoRepositorio;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,7 +49,7 @@ public class ControladorProducto {
     @GetMapping("/productos/filtro/{descripcion}")
     public Producto buscarDescripcion(@PathVariable("descripcion") String descripcion) {
     	return repositorio.findAll().stream()
-                                    .filter(Producto -> Producto.getDescripcion()
+                                    .filter(producto -> producto.getDescripcion()
                                     .equals(descripcion)).findFirst().get();
     }
     

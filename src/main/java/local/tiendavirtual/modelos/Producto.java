@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "productos")
-public class Producto {
+public class Producto implements Comparable<Producto>{
     
     private int id;
     private String descripcion;
@@ -94,5 +94,16 @@ public class Producto {
                          "cantidad=" + cantidad + "," +
                          "votos=" + votos + "," +
                          "imagen=" + imagen;
+    }
+
+    @Override
+    public int compareTo(Producto o) {
+        if (this.getDescripcion().compareTo(o.getDescripcion()) > 0) {
+            return 1;
+        } else if (this.getDescripcion().compareTo(o.getDescripcion()) < 0) {
+            return -1;
+        } else {
+            return 0;
+        }
     }
 }
