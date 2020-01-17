@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "productos")
-public class Producto implements Comparable<Producto>{
+public class Producto {
     
     private int id;
     private String descripcion;
@@ -17,17 +17,19 @@ public class Producto implements Comparable<Producto>{
     private int cantidad;
     private int votos;
     private String imagen;
+    private int categoria_id;
 
     public Producto() {
     }
 
-    public Producto(int id, String descripcion, double precio, int cantidad, String imagen) {
+    public Producto(int id, String descripcion, double precio, int cantidad, int votos, String imagen, int categoria_id) {
         this.id = id;
         this.descripcion = descripcion;
         this.precio = precio;
         this.cantidad = cantidad;
-        this.votos = 0;
+        this.votos = votos;
         this.imagen = imagen;
+        this.categoria_id = categoria_id;
     }
 
     @Id
@@ -86,6 +88,15 @@ public class Producto implements Comparable<Producto>{
         this.imagen = imagen;
     }
 
+    @Column(name = "categoria_id")
+    public int getCategoria_id() {
+        return categoria_id;
+    }
+    
+    public void setCategoria_id(int categoria_id) {
+        this.categoria_id = categoria_id;
+    }
+    
     @Override
     public String toString() {
         return "Producto [id=" + id + "," +
@@ -93,17 +104,7 @@ public class Producto implements Comparable<Producto>{
                          "precio=" + precio + "," +
                          "cantidad=" + cantidad + "," +
                          "votos=" + votos + "," +
-                         "imagen=" + imagen;
-    }
-
-    @Override
-    public int compareTo(Producto o) {
-        if (this.getDescripcion().compareTo(o.getDescripcion()) > 0) {
-            return 1;
-        } else if (this.getDescripcion().compareTo(o.getDescripcion()) < 0) {
-            return -1;
-        } else {
-            return 0;
-        }
+                         "imagen=" + imagen + "," +
+                         "categoria_id=" + categoria_id + "]";
     }
 }

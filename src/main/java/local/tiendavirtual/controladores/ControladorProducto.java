@@ -28,17 +28,17 @@ public class ControladorProducto {
         return repositorio.findAll();
     }
     
-    @PostMapping("/productos")
+    @PostMapping("/productos/agregar")
     public Producto agregar(@Valid @RequestBody Producto producto) {
         return repositorio.save(producto);
     }
     
-    @PutMapping("/productos/{id}")
-    public Producto actualizar(@Valid @RequestBody Producto producto) {
+    @PutMapping("/productos/modificar/{id}")
+    public Producto actualizar(@PathVariable("id") int id, @Valid @RequestBody Producto producto) {
         return repositorio.save(producto);
     }
     
-    @GetMapping("/productos/{id}")
+    @GetMapping("/productos/buscar/{id}")
     public Producto buscar(@PathVariable("id") int id) {
     	return repositorio.findById(id).get(); 
     }
@@ -50,7 +50,7 @@ public class ControladorProducto {
                                     .equals(descripcion)).findFirst().get();
     }
     
-    @DeleteMapping("/productos/{id}")
+    @DeleteMapping("/productos/eliminar/{id}")
     public void eliminar(@PathVariable("id") int id) {
         repositorio.deleteById(id);
     }

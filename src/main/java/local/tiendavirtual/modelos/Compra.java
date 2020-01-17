@@ -13,14 +13,14 @@ public class Compra {
 
 
     private int id;
-    private int cliente_id;
+    private String cliente_id;
     private int producto_id;
     private int cantidad;
 
     public Compra() {
     }
 
-    public Compra(int id, int cliente_id, int producto_id, int cantidad) {
+    public Compra(int id, String cliente_id, int producto_id, int cantidad) {
         this.id = id;
         this.cliente_id = cliente_id;
         this.producto_id = producto_id;
@@ -39,11 +39,11 @@ public class Compra {
     }
     
     @Column(name = "cliente_id")
-    public int getCliente_id() {
+    public String getCliente_id() {
         return cliente_id;
     }
 
-    public void setCliente_id(int cliente_id) {
+    public void setCliente_id(String cliente_id) {
         this.cliente_id = cliente_id;
     }
 

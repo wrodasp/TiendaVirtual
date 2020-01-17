@@ -27,17 +27,17 @@ public class ControladorCategoria {
         return repositorio.findAll();
     }
     
-    @PostMapping("/categorias")
+    @PostMapping("/categorias/agregar")
     public Categoria agregarCategoria(@Valid @RequestBody Categoria categoria) {
         return repositorio.save(categoria);
     }
     
-    @GetMapping("/categorias/{id}")
+    @GetMapping("/categorias/buscar/{id}")
     public Categoria buscar(@PathVariable("id") int id) {
-    	return repositorio.findById(id).get(); 
+    	return repositorio.findById(id).orElse(new Categoria(0, "Sin categoría")); 
     }
     
-    @DeleteMapping("/categorias/{id}")
+    @DeleteMapping("/categorias/eliminar/{id}")
     public void eliminar(@PathVariable("id") int id) {
         repositorio.deleteById(id);
     }

@@ -29,24 +29,24 @@ public class ControladorUsuario {
         return repositorio.findAll();
     }
     
-    @PostMapping("/usuarios")
+    @PostMapping("/usuarios/agregar")
     public Usuario agregar(@Valid @RequestBody Usuario usuario) {
         return repositorio.save(usuario);
     }
     
-    @PutMapping("/usuarios/{correo}")
+    @PutMapping("/usuarios/modificar/{correo}")
     public Usuario actualizar(@PathVariable("correo") String correo,
                               @Valid @RequestBody Usuario usuario) {
         usuario.setCorreo(correo);
         return repositorio.save(usuario);
     }
     
-    @GetMapping("/usuarios/{correo}")
+    @GetMapping("/usuarios/buscar/{correo}")
     public Usuario buscar(@PathVariable("correo") String correo) {
         return repositorio.findById(correo + ".").get();
     }
     
-    @DeleteMapping("/usuarios/{correo}")
+    @DeleteMapping("/usuarios/eliminar/{correo}")
     public void eliminar(@PathVariable("correo") String correo) {
         repositorio.deleteById(correo + ".");
     }
