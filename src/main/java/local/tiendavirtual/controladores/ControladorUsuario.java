@@ -20,32 +20,53 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping()
 public class ControladorUsuario {
-    
+    /**
+     * Atributos de la clase ControladorUsuario
+     */
     @Autowired
     private UsuarioRepositorio repositorio;
-    
+   /**
+    * Metodo para listar los Usuarios
+    * @return Retorna una lista de los usuarios
+    */
     @GetMapping("/usuarios")
     public List<Usuario> listarProductos() {
         return repositorio.findAll();
     }
-    
+    /**
+     * Metodo para agregar un Usuario
+     * @param usuario Recibe un atributo de tipo usuario
+     * @return retorna si se a guardado el usuario
+     */
     @PostMapping("/usuarios/agregar")
     public Usuario agregar(@Valid @RequestBody Usuario usuario) {
         return repositorio.save(usuario);
     }
-    
+    /**
+     * Metodo para modificar un usuario
+     * @param correo Recibe el correo del usuario a actualizar
+     * @param usuario Recibe el usuario modificado
+     * @return retorna si se a actualizado correctamente
+     */
     @PutMapping("/usuarios/modificar/{correo}")
     public Usuario actualizar(@PathVariable("correo") String correo,
                               @Valid @RequestBody Usuario usuario) {
         usuario.setCorreo(correo);
         return repositorio.save(usuario);
     }
-    
+    /**
+     * Metodo para buscar un  usuario
+     * @param correo Recibe el correo para buscar 
+     * @return retorna un cliente 
+     */
     @GetMapping("/usuarios/buscar/{correo}")
     public Usuario buscar(@PathVariable("correo") String correo) {
         return repositorio.findById(correo + ".").get();
     }
-    
+    /**
+     * 
+     * @param correo Recibe el correo para eliminar el usuario
+     */
     @DeleteMapping("/usuarios/eliminar/{correo}")
     public void eliminar(@PathVariable("correo") String correo) {
         repositorio.deleteById(correo + ".");

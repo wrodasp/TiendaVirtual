@@ -20,23 +20,35 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping()
 public class ControladorCompra {
-    
+    /**
+     * Atributos de la clase Controlad
+     */
     @Autowired
     private CompraRepositorio repositorio;
-    
+  
     @PersistenceContext
     private EntityManager entity;
-    
+    /**
+     * Metodo para listar las compras
+     * @return Retorna una lista con todas las compras realizadas
+     */
     @GetMapping("/compras")
     public List<Compra> listarCompras() {
         return repositorio.findAll();
     }
-    
+    /**
+     * Metodo para Agregar una nueva Compra
+     * @param compra Recibe un atributo de tipo compra 
+     * @return Retorna si se guardo o no se guardo la compra
+     */
     @PostMapping("/compras/agregar")
     public Compra agregar(@Valid @RequestBody Compra compra) {
         return repositorio.save(compra);
     }
-    
+    /**
+     * Lista los productos mas vendidos
+     * @return retorna una lista de objetos, productos mas vendidos
+     */
     @GetMapping("/compras/masVendidos")
     public List<Object[]> listarProductosMasVendidos() {
         Query consulta = entity.createNativeQuery("select p.id, p.descripcion, sum(c.cantidad) " +
@@ -47,7 +59,10 @@ public class ControladorCompra {
                                                   "limit 5");
         return consulta.getResultList();
     }
-    
+    /**
+     * Lista los productos mas votados
+     * @return retorna una lista de objetos, productos mas votados
+     */
     @GetMapping("/compras/masVotados")
     public List<Object[]> listarProductosMasVotados() {
         Query consulta = entity.createNativeQuery("select p.descripcion, p.votos " +
@@ -56,7 +71,10 @@ public class ControladorCompra {
                                                   "limit 5");
         return consulta.getResultList();
     }
-    
+    /**
+     * Lista los Clientes que mas compran
+     * @return retorna una lista de objetos,Clientes que mas compran
+     */
     @GetMapping("/compras/queMasCompran")
     public List<Object[]> listarClientesQueMasCompran() {
         Query consulta = entity.createNativeQuery("select u.nombre, u.apellido, " +
@@ -68,7 +86,11 @@ public class ControladorCompra {
                                                   "limit 5");
         return consulta.getResultList();
     }
-    
+   /**
+    * 
+    * @param correo Correo del usuario
+    * @return retorna una lista de todas las compras realizadas por el Cliente
+    */
     @GetMapping("/compras/comprados/{correo}")
     public List<Object[]> listarComprasDelCliente(@PathVariable("correo") String correo) {
         Query consulta = entity.createNativeQuery("select distinct p.imagen, p.descripcion, c.cantidad, " +
